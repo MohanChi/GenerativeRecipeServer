@@ -29,7 +29,7 @@ def GetRecipeCategories():
 
 @app.route('/GetParticularRecipeCategories', methods = ['GET'])
 def GetParticularRecipeCategories():
-    #test
+    #test_1
     return 0
 
 
