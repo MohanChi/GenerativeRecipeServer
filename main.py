@@ -28,7 +28,6 @@ EXAMPLE_RESULT_CATEGORY = {
 }
 
 client = OpenAI(api_key=openai.api_key)
-input_value = 'pasta'
 
 @app.route('/GetRecipeCategories', methods = ['POST'])
 def GetRecipeCategories():
@@ -62,7 +61,8 @@ def GetRecipeCategories():
 def GetParticularRecipeCategories():
     user_json_data = request.get_json()
     categories = user_json_data.get("categories", [])
-    prompt = f"Give me a Recipe of {input_value}\n"
+    userInput = user_json_data.get("userInput")
+    prompt = f"Give me a Recipe of {userInput}\n"
     for category in categories:
         for key, values in category.items():
             prompt += f"{key} is {', '.join(values)}\n"
@@ -72,7 +72,7 @@ def GetParticularRecipeCategories():
         response_format={"type": "text"},
         messages=[
             {"role": "system", "content":
-                "You are a helpful assistant designed to output a customer recipe text."
+                "You are a helpful assistant designed to output a customized recipe text."
              },
             {"role": "user", "content": prompt}
         ]
