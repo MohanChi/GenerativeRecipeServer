@@ -5,7 +5,7 @@ import openai
 import json
 
 # openai.api_key = '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'
-openai.api_key = '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'
+openai.api_key = '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'
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -60,8 +60,9 @@ def GetRecipeCategories():
 @app.route('/GetParticularRecipeCategories', methods = ['POST'])
 def GetParticularRecipeCategories():
     user_json_data = request.get_json()
+    print(user_json_data)
     categories = user_json_data.get("categories", [])
-    userInput = user_json_data.get("userInput")
+    userInput = user_json_data['categories'][1]['userInput']
     prompt = f"Give me a Recipe of {userInput}\n"
     for category in categories:
         for key, values in category.items():
